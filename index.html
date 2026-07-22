@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rafik Raafat — AI &amp; Full-Stack Product Engineer</title>
+  <meta name="description" content="Rafik Raafat Adel — Computer Science (AI) engineer and full-stack product builder. I design and ship products that connect people." />
+  <meta name="author" content="Rafik Raafat Adel" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rafik Raafat — AI &amp; Full-Stack Product Engineer" />
+  <meta property="og:description" content="Computer Science (AI) engineer and full-stack product builder. I design and ship products that connect people." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a192f;
+      --bg-light: #112240;
+      --bg-lightest: #233554;
+      --slate: #8892b0;
+      --slate-light: #a8b2d1;
+      --slate-lightest: #ccd6f6;
+      --white: #e6f1ff;
+      --accent: #64ffda;
+      --accent-tint: rgba(100, 255, 218, 0.1);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      --nav-h: 80px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--slate);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--accent-tint); }
+
+    a { color: var(--accent); text-decoration: none; transition: color .2s ease; }
+    a:hover { color: var(--accent); }
+
+    h1, h2, h3, h4 { color: var(--slate-lightest); font-weight: 700; line-height: 1.1; }
+
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+
+    /* ---------- Scroll progress bar ---------- */
+    #progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: var(--accent); z-index: 100; transition: width .1s linear;
+    }
+
+    /* ---------- Navbar ---------- */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; z-index: 90;
+      background: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(10px);
+      transition: transform .3s ease, box-shadow .3s ease, height .3s ease;
+    }
+    header.scrolled { box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7); }
+    header.hide { transform: translateY(-100%); }
+
+    .logo {
+      font-family: var(--font-mono); font-weight: 700; font-size: 22px;
+      color: var(--accent); border: 2px solid var(--accent);
+      width: 44px; height: 44px; display: grid; place-items: center;
+      border-radius: 8px; transition: transform .2s ease, background .2s ease;
+    }
+    .logo:hover { transform: translateY(-3px); background: var(--accent-tint); }
+
+    nav ul { display: flex; gap: 28px; list-style: none; align-items: center; }
+    nav ul li a {
+      font-family: var(--font-mono); font-size: 13px; color: var(--slate-lightest);
+    }
+    nav ul li a .num { color: var(--accent); margin-right: 5px; }
+    nav ul li a:hover { color: var(--accent); }
+    .resume-btn {
+      font-family: var(--font-mono); font-size: 13px; color: var(--accent) !important;
+      border: 1px solid var(--accent); border-radius: 6px; padding: 10px 16px;
+      transition: background .2s ease;
+    }
+    .resume-btn:hover { background: var(--accent-tint); }
+
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; z-index: 95; }
+    .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--accent); margin: 6px 0; transition: .3s; }
+
+    /* ---------- Side rails ---------- */
+    .rail { position: fixed; bottom: 0; width: 40px; z-index: 80; }
+    .rail.left { left: 40px; }
+    .rail.right { right: 40px; }
+    .rail ul { display: flex; flex-direction: column; align-items: center; gap: 22px; list-style: none; }
+    .rail::after { content: ''; display: block; width: 1px; height: 90px; margin: 0 auto; background: var(--slate); }
+    .rail.left ul li a { color: var(--slate-light); font-size: 18px; transition: transform .2s ease, color .2s ease; display: inline-block; }
+    .rail.left ul li a:hover { color: var(--accent); transform: translateY(-3px); }
+    .rail.right .email {
+      writing-mode: vertical-rl; font-family: var(--font-mono); font-size: 12px;
+      letter-spacing: 1px; color: var(--slate-light); margin-bottom: 20px;
+    }
+    .rail.right .email:hover { color: var(--accent); transform: translateY(-3px); }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Hero ---------- */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      max-width: 1100px; padding-top: var(--nav-h);
+    }
+    #hero .intro { font-family: var(--font-mono); color: var(--accent); font-size: 16px; margin-bottom: 24px; }
+    #hero h1 { font-size: clamp(40px, 8vw, 78px); color: var(--slate-lightest); margin-bottom: 6px; }
+    #hero h2 { font-size: clamp(32px, 7vw, 68px); color: var(--slate); font-weight: 700; }
+    #hero p { max-width: 560px; margin-top: 26px; font-size: 18px; }
+    #hero p .hl { color: var(--accent); }
+    .cta {
+      display: inline-block; margin-top: 44px; font-family: var(--font-mono); font-size: 15px;
+      color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 16px 26px;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .cta:hover { background: var(--accent-tint); transform: translateY(-3px); }
+
+    /* ---------- Section headings ---------- */
+    .heading { display: flex; align-items: center; gap: 14px; margin-bottom: 44px; width: 100%; }
+    .heading h2 { font-size: clamp(24px, 5vw, 32px); white-space: nowrap; }
+    .heading .num { font-family: var(--font-mono); color: var(--accent); font-size: 20px; font-weight: 500; }
+    .heading::after { content: ''; height: 1px; width: 100%; max-width: 300px; background: var(--bg-lightest); }
+
+    /* ---------- About ---------- */
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 50px; align-items: start; }
+    .about-grid p { margin-bottom: 15px; }
+    .about-grid .name-hl { color: var(--slate-lightest); font-weight: 600; }
+    .skills-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 20px; font-family: var(--font-mono); font-size: 14px; }
+    .skills-list li { position: relative; padding-left: 22px; }
+    .skills-list li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
+
+    .portrait { position: relative; max-width: 300px; }
+    .portrait .frame {
+      aspect-ratio: 1; border-radius: 10px; border: 2px solid var(--accent);
+      display: grid; place-items: center; background: var(--bg-light);
+      font-family: var(--font-mono); font-size: 90px; font-weight: 700; color: var(--accent);
+      transition: transform .3s ease;
+    }
+    .portrait:hover .frame { transform: translate(-6px, -6px); }
+    .portrait::after {
+      content: ''; position: absolute; inset: 16px -16px -16px 16px; border: 2px solid var(--accent);
+      border-radius: 10px; z-index: -1; transition: inset .3s ease;
+    }
+    .portrait:hover::after { inset: 22px -10px -10px 22px; }
+
+    .glance { margin-top: 34px; background: var(--bg-light); border-radius: 10px; padding: 22px 24px; font-size: 15px; }
+    .glance h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .glance div { margin-bottom: 10px; color: var(--slate-light); }
+    .glance div:last-child { margin-bottom: 0; }
+
+    /* ---------- Experience (tabs) ---------- */
+    .exp-wrap { display: grid; grid-template-columns: max-content 1fr; gap: 40px; }
+    .tab-list { display: flex; flex-direction: column; position: relative; }
+    .tab-list button {
+      background: none; border: none; border-left: 2px solid var(--bg-lightest);
+      padding: 14px 22px; text-align: left; cursor: pointer; font-family: var(--font-mono);
+      font-size: 14px; color: var(--slate-light); white-space: nowrap; transition: .2s;
+    }
+    .tab-list button:hover { background: var(--bg-light); color: var(--accent); }
+    .tab-list button.active { color: var(--accent); border-left: 2px solid var(--accent); background: var(--bg-light); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fade .4s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+    .tab-panel h3 { font-size: 22px; color: var(--slate-lightest); }
+    .tab-panel h3 .at { color: var(--accent); }
+    .tab-panel .range { font-family: var(--font-mono); font-size: 13px; color: var(--slate-light); margin: 6px 0 20px; }
+    .tab-panel ul { list-style: none; }
+    .tab-panel ul li { position: relative; padding-left: 28px; margin-bottom: 12px; }
+    .tab-panel ul li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
+
+    /* ---------- Projects ---------- */
+    .featured { display: grid; gap: 90px; }
+    .feature { display: grid; grid-template-columns: repeat(12, 1fr); align-items: center; }
+    .feature .art {
+      grid-column: 1 / 8; grid-row: 1; border-radius: 10px; min-height: 320px;
+      background: linear-gradient(135deg, var(--bg-light), var(--bg-lightest));
+      display: grid; place-items: center; font-size: 100px; position: relative; overflow: hidden;
+      border: 1px solid var(--bg-lightest);
+    }
+    .feature .art span { filter: grayscale(.2); opacity: .9; }
+    .feature .info { grid-column: 6 / 13; grid-row: 1; text-align: right; z-index: 2; }
+    .feature .over { font-family: var(--font-mono); color: var(--accent); font-size: 13px; }
+    .feature .info h3 { font-size: 26px; margin: 6px 0 20px; }
+    .feature .desc { background: var(--bg-light); padding: 24px; border-radius: 8px; box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); font-size: 16px; }
+    .feature .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: flex-end; margin-top: 18px; font-family: var(--font-mono); font-size: 13px; color: var(--slate-light); }
+    .feature.reverse .art { grid-column: 6 / 13; }
+    .feature.reverse .info { grid-column: 1 / 8; text-align: left; }
+    .feature.reverse .tags { justify-content: flex-start; }
+
+    /* ---------- Other cards ---------- */
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 10px; }
+    .card {
+      background: var(--bg-light); border-radius: 10px; padding: 28px 26px;
+      transition: transform .2s ease, box-shadow .2s ease; display: flex; flex-direction: column;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px -15px rgba(2,12,27,0.7); }
+    .card .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .card .top .ico { font-size: 38px; }
+    .card h3 { font-size: 20px; color: var(--slate-lightest); margin-bottom: 10px; }
+    .card p { font-size: 15px; flex: 1; }
+    .card .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--slate-light); }
+
+    /* ---------- Stack ---------- */
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .stack-block { background: var(--bg-light); border-radius: 10px; padding: 24px; }
+    .stack-block h4 { font-family: var(--font-mono); color: var(--accent); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .stack-block .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .stack-block .chips span { background: var(--accent-tint); color: var(--slate-light); font-family: var(--font-mono); font-size: 12px; padding: 6px 10px; border-radius: 6px; }
+
+    /* ---------- Contact ---------- */
+    #contact { text-align: center; max-width: 640px; }
+    #contact .over { font-family: var(--font-mono); color: var(--accent); font-size: 15px; }
+    #contact h2 { font-size: clamp(40px, 8vw, 60px); color: var(--slate-lightest); margin: 16px 0 20px; }
+    #contact p { font-size: 17px; }
+
+    footer { text-align: center; padding: 30px 20px 40px; font-family: var(--font-mono); font-size: 13px; color: var(--slate-light); }
+    footer .socials { display: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .portrait { margin: 0 auto; }
+      .exp-wrap { grid-template-columns: 1fr; }
+      .tab-list { flex-direction: row; overflow-x: auto; }
+      .tab-list button { border-left: none; border-bottom: 2px solid var(--bg-lightest); }
+      .tab-list button.active { border-left: none; border-bottom: 2px solid var(--accent); }
+      .feature, .feature.reverse { display: block; }
+      .feature .art, .feature.reverse .art { min-height: 220px; margin-bottom: -60px; opacity: .5; }
+      .feature .info, .feature.reverse .info { text-align: left; padding-top: 20px; }
+      .feature .tags, .feature.reverse .tags { justify-content: flex-start; }
+      .cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .rail { display: none; }
+      nav ul { display: none; }
+      .nav-toggle { display: block; }
+      header { padding: 0 24px; }
+      nav.mobile ul {
+        display: flex; flex-direction: column; position: fixed; top: 0; right: 0;
+        height: 100vh; width: min(75vw, 300px); background: var(--bg-light);
+        justify-content: center; gap: 30px; box-shadow: -10px 0 30px -15px rgba(2,12,27,0.7);
+        transform: translateX(100%); transition: transform .3s ease;
+      }
+      nav.mobile.open ul { transform: translateX(0); }
+      nav.mobile ul li a { font-size: 15px; }
+      section { padding: 80px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+
+  <header id="navbar">
+    <a href="#hero" class="logo">R</a>
+    <nav id="nav">
+      <ul>
+        <li><a href="#about"><span class="num">01.</span>About</a></li>
+        <li><a href="#experience"><span class="num">02.</span>Experience</a></li>
+        <li><a href="#work"><span class="num">03.</span>Work</a></li>
+        <li><a href="#activities"><span class="num">04.</span>Beyond code</a></li>
+        <li><a href="#stack"><span class="num">05.</span>Stack</a></li>
+        <li><a href="#contact"><span class="num">06.</span>Contact</a></li>
+        <li><a href="mailto:rafikraafat14@gmail.com" class="resume-btn">Say hi</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- Left social rail -->
+  <div class="rail left">
+    <ul>
+      <li><a href="https://github.com/rafraa" target="_blank" rel="noopener" title="GitHub">⌨</a></li>
+      <li><a href="https://www.linkedin.com/in/rafik-raafat-13a55721b/" target="_blank" rel="noopener" title="LinkedIn">in</a></li>
+      <li><a href="mailto:rafikraafat14@gmail.com" title="Email">✉</a></li>
+    </ul>
+  </div>
+  <!-- Right email rail -->
+  <div class="rail right">
+    <a href="mailto:rafikraafat14@gmail.com" class="email">rafikraafat14@gmail.com</a>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero">
+      <p class="intro">Hi, my name is</p>
+      <h1>Rafik Raafat.</h1>
+      <h2>I build products that connect people.</h2>
+      <p>
+        I'm a Computer Science engineer specializing in <span class="hl">Artificial Intelligence</span>
+        and full-stack product development. I turn ideas into shipped products — from matching
+        algorithms and swipe interfaces to the APIs and mobile apps behind them.
+      </p>
+      <a href="#work" class="cta">Check out my work</a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="heading reveal"><span class="num">01.</span><h2>About me</h2></div>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>
+            Hi! I'm <span class="name-hl">Rafik</span>, a product engineer based in Cairo, Egypt. I love
+            the intersection where <span class="name-hl">engineering meets product</span> — figuring out
+            what to build, then actually building and shipping it.
+          </p>
+          <p>
+            Most recently at <a href="https://bareq.dev" target="_blank" rel="noopener">Bareq</a>, I helped
+            build and ship an MVP in 3 months with a 3-person team, designing the core matching algorithm
+            and a Tinder-style swipe interface that connects employers and job seekers.
+          </p>
+          <p>
+            My background is a mix of <span class="name-hl">software engineering, AI, and real-world
+            operations</span> — I've shipped code, negotiated 50+ partnerships in a sales role, and even
+            co-run a clothing brand where I optimized factory operations by 250%. I bring that same
+            end-to-end, get-it-done mindset to every product I touch.
+          </p>
+          <p>Here are a few technologies I've been working with recently:</p>
+          <ul class="skills-list">
+            <li>React Native</li>
+            <li>Next.js</li>
+            <li>NestJS / REST APIs</li>
+            <li>TypeScript</li>
+            <li>Python &amp; SQL</li>
+            <li>PyTorch / scikit-learn</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="portrait"><div class="frame">RR</div></div>
+          <div class="glance">
+            <h4>At a glance</h4>
+            <div>📍 Cairo, Egypt · remote-friendly</div>
+            <div>🎓 B.Sc. Computer Science (AI), Arab Open University — 2026</div>
+            <div>🗣️ Arabic (native) · English</div>
+            <div>🚀 Product engineer @ Bareq</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="heading reveal"><span class="num">02.</span><h2>Where I've worked</h2></div>
+      <div class="exp-wrap reveal">
+        <div class="tab-list" id="tabList">
+          <button class="active" data-tab="0">Bareq</button>
+          <button data-tab="1">Venu</button>
+          <button data-tab="2">Brain Health USA</button>
+        </div>
+        <div class="tab-content">
+          <div class="tab-panel active" data-panel="0">
+            <h3>Product Engineer <span class="at">@ Bareq</span></h3>
+            <p class="range">May 2026 — Jul 2026 · Cairo, Egypt</p>
+            <ul>
+              <li>Built and shipped an MVP in 3 months with a 3-person team using React Native, Next.js, NestJS, and TypeScript.</li>
+              <li>Designed the product's core matching algorithm and UX for a Tinder-style swipe interface connecting employers and job seekers.</li>
+              <li>Owned features end-to-end — from data model and API design to the mobile front-end experience.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" data-panel="1">
+            <h3>Sales Representative &amp; App Developer <span class="at">@ Venu</span></h3>
+            <p class="range">Jul 2023 — Sep 2023 · Cairo, Egypt</p>
+            <ul>
+              <li>Negotiated and successfully partnered with 50+ venues and venue owners to join the platform.</li>
+              <li>Set up and led meetings with venue owners to structure deals beneficial to both parties.</li>
+              <li>Contributed to the web and mobile app — editing and optimizing code, improving performance, and supporting feature implementation.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" data-panel="2">
+            <h3>Patient Care Manager <span class="at">@ Brain Health USA</span></h3>
+            <p class="range">Sep 2022 — Mar 2023 · California, USA</p>
+            <ul>
+              <li>Managed patient and doctor interactions — scheduling appointments, organizing records, and resolving inquiries and complaints.</li>
+              <li>Handled the largest volume of doctor schedules and patients in parallel, performing reliably under pressure.</li>
+              <li>Built strong communication and operations skills in a fast-paced healthcare environment.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK / PROJECTS -->
+    <section id="work">
+      <div class="heading reveal"><span class="num">03.</span><h2>Things I've built</h2></div>
+      <div class="featured">
+        <div class="feature reveal">
+          <div class="art"><span>💼</span></div>
+          <div class="info">
+            <p class="over">Featured product · Bareq</p>
+            <h3>Job-Matching App — swipe to hire</h3>
+            <div class="desc">
+              A Tinder-style hiring platform that connects employers and job seekers through a swipe
+              interface. I designed and built the core matching algorithm and the swipe UX, plus the
+              cross-platform mobile app and the APIs powering it. Shipped as an MVP in 3 months with a
+              3-person team.
+            </div>
+            <ul class="tags">
+              <li>React Native</li><li>Next.js</li><li>NestJS</li><li>TypeScript</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature reverse reveal">
+          <div class="art"><span>👕</span></div>
+          <div class="info">
+            <p class="over">Founder &amp; operations</p>
+            <h3>The Guardian Angel — clothing brand</h3>
+            <div class="desc">
+              A local clothing brand I co-founded and run with a friend. Beyond the product, I focused on
+              operations and factory management — driving a <strong>250% increase in output efficiency</strong>,
+              a <strong>25% jump in monthly revenue</strong> over a year, and breaking even by month 15.
+            </div>
+            <ul class="tags">
+              <li>Operations</li><li>Ops Optimization</li><li>Brand</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature reveal">
+          <div class="art"><span>🤖</span></div>
+          <div class="info">
+            <p class="over">Coursework &amp; self-study</p>
+            <h3>Machine Learning &amp; AI projects</h3>
+            <div class="desc">
+              Hands-on ML/DL work built through my AI major and open courses (Stanford CS229, Coursera).
+              Neural networks, CNNs/RNNs, and support vector machines in Python — with a focus on model
+              evaluation and getting from dataset to working model.
+            </div>
+            <ul class="tags">
+              <li>Python</li><li>PyTorch</li><li>scikit-learn</li><li>NumPy / Pandas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTIVITIES / BEYOND CODE -->
+    <section id="activities">
+      <div class="heading reveal"><span class="num">04.</span><h2>Beyond code</h2></div>
+      <div class="cards">
+        <div class="card reveal">
+          <div class="top"><span class="ico">👕</span></div>
+          <h3>The Guardian Angel</h3>
+          <p>Brand owner &amp; operations (2025–2026). Invested in and grew a local clothing brand, optimizing product output efficiency by 250% and monthly revenue by 25%.</p>
+          <ul class="tags"><li>Entrepreneurship</li><li>Operations</li></ul>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="ico">🎭</span></div>
+          <h3>Teamwa7ed</h3>
+          <p>Stage &amp; lighting specialist (2019–2023). Led a team of up to 12 volunteers, handling stage, terrace, and lighting systems — including electrical setup and basic programming under tight timelines.</p>
+          <ul class="tags"><li>Leadership</li><li>Teamwork</li></ul>
+        </div>
+        <div class="card reveal">
+          <div class="top"><span class="ico">📚</span></div>
+          <h3>Always learning</h3>
+          <p>Continuous self-study across HTML/CSS (Udemy), SQL &amp; database engines (freeCodeCamp), CS229 Machine Learning (Stanford), and SVMs in Python (Coursera).</p>
+          <ul class="tags"><li>SQL</li><li>ML</li><li>Web</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack">
+      <div class="heading reveal"><span class="num">05.</span><h2>Tools of the trade</h2></div>
+      <div class="stack-grid">
+        <div class="stack-block reveal">
+          <h4>Languages</h4>
+          <div class="chips"><span>Python</span><span>TypeScript</span><span>SQL</span><span>Java</span><span>C++</span><span>HTML</span></div>
+        </div>
+        <div class="stack-block reveal">
+          <h4>Full-Stack</h4>
+          <div class="chips"><span>React Native</span><span>Next.js</span><span>NestJS</span><span>REST APIs</span></div>
+        </div>
+        <div class="stack-block reveal">
+          <h4>ML / DL</h4>
+          <div class="chips"><span>PyTorch</span><span>TensorFlow</span><span>scikit-learn</span><span>NumPy</span><span>Pandas</span></div>
+        </div>
+        <div class="stack-block reveal">
+          <h4>Data</h4>
+          <div class="chips"><span>SQL</span><span>Database Design</span><span>ETL Fundamentals</span></div>
+        </div>
+        <div class="stack-block reveal">
+          <h4>Concepts</h4>
+          <div class="chips"><span>Neural Networks</span><span>CNNs / RNNs</span><span>SVMs</span><span>Model Evaluation</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <p class="over reveal">06. What's next?</p>
+      <h2 class="reveal">Get in touch</h2>
+      <p class="reveal">
+        I'm currently open to new opportunities and interesting projects. Whether you have a question,
+        a role in mind, or just want to say hi — my inbox is always open.
+      </p>
+      <a href="mailto:rafikraafat14@gmail.com" class="cta reveal">Say hello</a>
+    </section>
+  </main>
+
+  <footer>
+    Designed &amp; built by Rafik Raafat Adel · Cairo, Egypt
+  </footer>
+
+  <script>
+    // Scroll progress bar
+    const progress = document.getElementById('progress');
+    // Navbar hide/show + shadow
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (scrolled / height * 100) + '%';
+
+      if (scrolled > 60) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+      if (scrolled > lastScroll && scrolled > 200) navbar.classList.add('hide');
+      else navbar.classList.remove('hide');
+      lastScroll = scrolled;
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Experience tabs
+    const tabList = document.getElementById('tabList');
+    tabList.addEventListener('click', (e) => {
+      const btn = e.target.closest('button'); if (!btn) return;
+      const idx = btn.dataset.tab;
+      tabList.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === idx));
+    });
+
+    // Mobile nav
+    const toggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    nav.classList.add('mobile');
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+  </script>
+</body>
+</html>
