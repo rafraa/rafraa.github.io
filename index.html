@@ -239,6 +239,17 @@
     .expanded-panel.open { display: block; }
     .expanded-panel .placeholder { color: var(--slate-light); font-family: var(--font-mono); font-size: 14px; }
 
+    /* Per-box inner expansion */
+    .inner-toggle {
+      background: transparent; border: 1px solid rgba(136,146,176,0.12); color: var(--accent);
+      width: 34px; height: 34px; border-radius: 8px; display: inline-grid; place-items: center;
+      font-family: var(--font-mono); font-size: 16px; cursor: pointer; margin-left: 8px;
+    }
+    .stack-block { position: relative; }
+    .inner-panel { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.03); }
+    .inner-panel.open { display: block; }
+    .inner-panel .chips span { background: rgba(100,255,218,0.06); }
+
     /* ---------- Contact ---------- */
     #contact { text-align: center; max-width: 640px; }
     #contact .over { font-family: var(--font-mono); color: var(--accent); font-size: 15px; }
@@ -492,87 +503,46 @@
 
     <!-- STACK -->
     <section id="stack">
-      <div class="heading reveal"><span class="num">05.</span><h2>Tools of the trade</h2>
-        <button class="expand-toggle" id="expandToggle" aria-expanded="false" aria-controls="expandedPanel" title="Show more">+</button>
-      </div>
+      <div class="heading reveal"><span class="num">05.</span><h2>Tools of the trade</h2></div>
       <div class="stack-grid">
         <div class="stack-block reveal">
-          <h4>Languages</h4>
+          <h4>Languages <button class="inner-toggle" aria-expanded="false" aria-controls="langPanel">+</button></h4>
           <div class="chips"><span>Python</span><span>TypeScript</span><span>SQL</span><span>Java</span><span>C++</span><span>HTML</span></div>
+          <div id="langPanel" class="inner-panel" aria-hidden="true">
+            <div class="chips"><span>Additional: Bash</span><span>Additional: R (placeholder)</span></div>
+          </div>
         </div>
         <div class="stack-block reveal">
-          <h4>Full-Stack</h4>
+          <h4>Full-Stack <button class="inner-toggle" aria-expanded="false" aria-controls="fullStackPanel">+</button></h4>
           <div class="chips"><span>React</span><span>React Native</span><span>Next.js</span><span>NestJS</span><span>REST APIs</span><span>Supabase</span></div>
+          <div id="fullStackPanel" class="inner-panel" aria-hidden="true">
+            <div class="chips"><span>Server-side rendering</span><span>API design patterns</span></div>
+          </div>
         </div>
         <div class="stack-block reveal">
-          <h4>Frontend &amp; Tooling</h4>
+          <h4>Frontend &amp; Tooling <button class="inner-toggle" aria-expanded="false" aria-controls="frontendPanel">+</button></h4>
           <div class="chips"><span>Webpack</span><span>SCSS</span><span>Tailwind CSS</span><span>Git</span><span>Postman</span></div>
+          <div id="frontendPanel" class="inner-panel" aria-hidden="true">
+            <div class="chips"><span>Accessibility (WCAG)</span><span>Performance optimization</span></div>
+          </div>
         </div>
         <div class="stack-block reveal">
-          <h4>ML / DL</h4>
+          <h4>ML / DL <button class="inner-toggle" aria-expanded="false" aria-controls="mlPanel">+</button></h4>
           <div class="chips"><span>PyTorch</span><span>TensorFlow</span><span>scikit-learn</span><span>NumPy</span><span>Pandas</span><span>Faster-Whisper</span><span>Streamlit</span></div>
+          <div id="mlPanel" class="inner-panel" aria-hidden="true">
+            <div class="chips"><span>Model evaluation strategies</span><span>On-device inference</span></div>
+          </div>
         </div>
         <div class="stack-block reveal">
-          <h4>Data</h4>
+          <h4>Data <button class="inner-toggle" aria-expanded="false" aria-controls="dataPanel">+</button></h4>
           <div class="chips"><span>SQL</span><span>Database Design</span><span>ETL Fundamentals</span></div>
+          <div id="dataPanel" class="inner-panel" aria-hidden="true">
+            <div class="chips"><span>Data modeling patterns</span><span>Query optimization</span></div>
+          </div>
         </div>
         <div class="stack-block reveal">
           <h4>Concepts</h4>
           <div class="chips"><span>Neural Networks</span><span>CNNs / RNNs</span><span>SVMs</span><span>Model Evaluation</span></div>
-        </div>
-      </div>
-      <div id="expandedPanel" class="expanded-panel" role="region" aria-hidden="true">
-        <div class="stack-grid">
-          <div class="stack-block">
-            <h4>Languages</h4>
-            <div class="chips">
-              <span>Python</span>
-              <span>Java</span>
-              <span>C++</span>
-              <span>TypeScript</span>
-              <span>SQL</span>
-              <span>HTML</span>
-            </div>
-          </div>
-          <div class="stack-block">
-            <h4>Full-Stack / Frameworks</h4>
-            <div class="chips">
-              <span>Next.js</span>
-              <span>NestJS</span>
-              <span>React</span>
-              <span>React Native</span>
-              <span>REST APIs</span>
-              <span>Supabase</span>
-            </div>
-          </div>
-          <div class="stack-block">
-            <h4>Frontend &amp; Tooling</h4>
-            <div class="chips">
-              <span>Webpack</span>
-              <span>SCSS</span>
-              <span>Tailwind CSS</span>
-              <span>Git</span>
-              <span>Postman</span>
-            </div>
-          </div>
-          <div class="stack-block">
-            <h4>ML / DL</h4>
-            <div class="chips">
-              <span>PyTorch</span>
-              <span>TensorFlow</span>
-              <span>scikit-learn</span>
-              <span>NumPy</span>
-              <span>Pandas</span>
-            </div>
-          </div>
-          <div class="stack-block">
-            <h4>Database &amp; Design</h4>
-            <div class="chips">
-              <span>Database Design</span>
-              <span>SQL</span>
-              <span>ETL Fundamentals</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -633,17 +603,18 @@
     nav.classList.add('mobile');
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
-    // Stack expand/collapse placeholder
-    const expandToggle = document.getElementById('expandToggle');
-    const expandedPanel = document.getElementById('expandedPanel');
-    if (expandToggle && expandedPanel) {
-      expandToggle.addEventListener('click', () => {
-        const open = expandedPanel.classList.toggle('open');
-        expandedPanel.setAttribute('aria-hidden', (!open).toString());
-        expandToggle.setAttribute('aria-expanded', open.toString());
-        expandToggle.textContent = open ? '\u2212' : '+'; // show − when open
+    // Per-box inner toggles for stack blocks
+    document.querySelectorAll('.inner-toggle').forEach(btn => {
+      const panelId = btn.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId);
+      btn.addEventListener('click', () => {
+        if (!panel) return;
+        const open = panel.classList.toggle('open');
+        panel.setAttribute('aria-hidden', (!open).toString());
+        btn.setAttribute('aria-expanded', open.toString());
+        btn.textContent = open ? '\u2212' : '+';
       });
-    }
+    });
   </script>
 </body>
 </html>
