@@ -223,9 +223,9 @@
     .card .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--slate-light); }
 
     /* ---------- Stack ---------- */
-    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; align-items: start; grid-auto-rows: min-content; }
-    .stack-block { background: var(--bg-light); border-radius: 10px; padding: 24px; }
-    .stack-block { align-self: start; }
+    .stack-columns { display: flex; gap: 24px; }
+    .stack-col { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+    .stack-block { background: var(--bg-light); border-radius: 10px; padding: 24px; width: 100%; }
     .stack-block h4 { font-family: var(--font-mono); color: var(--accent); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
     .stack-block .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .stack-block .chips span { background: var(--accent-tint); color: var(--slate-light); font-family: var(--font-mono); font-size: 12px; padding: 6px 10px; border-radius: 6px; }
@@ -265,6 +265,7 @@
       .about-grid { grid-template-columns: 1fr; }
       .portrait { margin: 0 auto; }
       .exp-wrap { grid-template-columns: 1fr; }
+      .stack-columns { flex-direction: column; }
       .tab-list { flex-direction: row; overflow-x: auto; }
       .tab-list button { border-left: none; border-bottom: 2px solid var(--bg-lightest); }
       .tab-list button.active { border-left: none; border-bottom: 2px solid var(--accent); }
@@ -505,45 +506,56 @@
     <!-- STACK -->
     <section id="stack">
       <div class="heading reveal"><span class="num">05.</span><h2>Tools of the trade</h2></div>
-      <div class="stack-grid">
-        <div class="stack-block reveal">
-          <h4>Languages <button class="inner-toggle" aria-expanded="false" aria-controls="langPanel">+</button></h4>
-          <div class="chips"><span>Python</span><span>TypeScript</span><span>SQL</span><span>Java</span><span>C++</span><span>HTML</span></div>
-          <div id="langPanel" class="inner-panel" aria-hidden="true">
-            <div class="chips"><span>Additional: Bash</span><span>Additional: R (placeholder)</span></div>
+      <div class="stack-columns">
+        <div class="stack-col">
+          <div class="stack-block reveal">
+            <h4>Languages <button class="inner-toggle" aria-expanded="false" aria-controls="langPanel">+</button></h4>
+            <div class="chips"><span>Python</span><span>TypeScript</span><span>SQL</span><span>Java</span><span>C++</span><span>HTML</span></div>
+            <div id="langPanel" class="inner-panel" aria-hidden="true">
+              <div class="chips"><span>Additional: Bash</span><span>Additional: R (placeholder)</span></div>
+            </div>
+          </div>
+
+          <div class="stack-block reveal">
+            <h4>ML / DL <button class="inner-toggle" aria-expanded="false" aria-controls="mlPanel">+</button></h4>
+            <div class="chips"><span>PyTorch</span><span>TensorFlow</span><span>scikit-learn</span><span>NumPy</span><span>Pandas</span><span>Faster-Whisper</span><span>Streamlit</span></div>
+            <div id="mlPanel" class="inner-panel" aria-hidden="true">
+              <div class="chips"><span>Model evaluation strategies</span><span>On-device inference</span></div>
+            </div>
           </div>
         </div>
-        <div class="stack-block reveal">
-          <h4>Full-Stack <button class="inner-toggle" aria-expanded="false" aria-controls="fullStackPanel">+</button></h4>
-          <div class="chips"><span>React</span><span>React Native</span><span>Next.js</span><span>NestJS</span><span>REST APIs</span><span>Supabase</span></div>
-          <div id="fullStackPanel" class="inner-panel" aria-hidden="true">
-            <div class="chips"><span>Server-side rendering</span><span>API design patterns</span></div>
+
+        <div class="stack-col">
+          <div class="stack-block reveal">
+            <h4>Full-Stack <button class="inner-toggle" aria-expanded="false" aria-controls="fullStackPanel">+</button></h4>
+            <div class="chips"><span>React</span><span>React Native</span><span>Next.js</span><span>NestJS</span><span>REST APIs</span><span>Supabase</span></div>
+            <div id="fullStackPanel" class="inner-panel" aria-hidden="true">
+              <div class="chips"><span>Server-side rendering</span><span>API design patterns</span></div>
+            </div>
+          </div>
+
+          <div class="stack-block reveal">
+            <h4>Data <button class="inner-toggle" aria-expanded="false" aria-controls="dataPanel">+</button></h4>
+            <div class="chips"><span>SQL</span><span>Database Design</span><span>ETL Fundamentals</span></div>
+            <div id="dataPanel" class="inner-panel" aria-hidden="true">
+              <div class="chips"><span>Data modeling patterns</span><span>Query optimization</span></div>
+            </div>
           </div>
         </div>
-        <div class="stack-block reveal">
-          <h4>Frontend &amp; Tooling <button class="inner-toggle" aria-expanded="false" aria-controls="frontendPanel">+</button></h4>
-          <div class="chips"><span>Webpack</span><span>SCSS</span><span>Tailwind CSS</span><span>Git</span><span>Postman</span></div>
-          <div id="frontendPanel" class="inner-panel" aria-hidden="true">
-            <div class="chips"><span>Accessibility (WCAG)</span><span>Performance optimization</span></div>
+
+        <div class="stack-col">
+          <div class="stack-block reveal">
+            <h4>Frontend &amp; Tooling <button class="inner-toggle" aria-expanded="false" aria-controls="frontendPanel">+</button></h4>
+            <div class="chips"><span>Webpack</span><span>SCSS</span><span>Tailwind CSS</span><span>Git</span><span>Postman</span></div>
+            <div id="frontendPanel" class="inner-panel" aria-hidden="true">
+              <div class="chips"><span>Accessibility (WCAG)</span><span>Performance optimization</span></div>
+            </div>
           </div>
-        </div>
-        <div class="stack-block reveal">
-          <h4>ML / DL <button class="inner-toggle" aria-expanded="false" aria-controls="mlPanel">+</button></h4>
-          <div class="chips"><span>PyTorch</span><span>TensorFlow</span><span>scikit-learn</span><span>NumPy</span><span>Pandas</span><span>Faster-Whisper</span><span>Streamlit</span></div>
-          <div id="mlPanel" class="inner-panel" aria-hidden="true">
-            <div class="chips"><span>Model evaluation strategies</span><span>On-device inference</span></div>
+
+          <div class="stack-block reveal">
+            <h4>Concepts</h4>
+            <div class="chips"><span>Neural Networks</span><span>CNNs / RNNs</span><span>SVMs</span><span>Model Evaluation</span></div>
           </div>
-        </div>
-        <div class="stack-block reveal">
-          <h4>Data <button class="inner-toggle" aria-expanded="false" aria-controls="dataPanel">+</button></h4>
-          <div class="chips"><span>SQL</span><span>Database Design</span><span>ETL Fundamentals</span></div>
-          <div id="dataPanel" class="inner-panel" aria-hidden="true">
-            <div class="chips"><span>Data modeling patterns</span><span>Query optimization</span></div>
-          </div>
-        </div>
-        <div class="stack-block reveal">
-          <h4>Concepts</h4>
-          <div class="chips"><span>Neural Networks</span><span>CNNs / RNNs</span><span>SVMs</span><span>Model Evaluation</span></div>
         </div>
       </div>
     </section>
