@@ -223,8 +223,9 @@
     .card .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--slate-light); }
 
     /* ---------- Stack ---------- */
-    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; align-items: start; grid-auto-rows: min-content; }
     .stack-block { background: var(--bg-light); border-radius: 10px; padding: 24px; }
+    .stack-block { align-self: start; }
     .stack-block h4 { font-family: var(--font-mono); color: var(--accent); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
     .stack-block .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .stack-block .chips span { background: var(--accent-tint); color: var(--slate-light); font-family: var(--font-mono); font-size: 12px; padding: 6px 10px; border-radius: 6px; }
