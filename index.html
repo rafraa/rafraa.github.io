@@ -229,6 +229,16 @@
     .stack-block .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .stack-block .chips span { background: var(--accent-tint); color: var(--slate-light); font-family: var(--font-mono); font-size: 12px; padding: 6px 10px; border-radius: 6px; }
 
+    /* Expandable placeholder for more tools */
+    .expand-toggle {
+      background: transparent; border: 1px solid var(--accent); color: var(--accent);
+      width: 36px; height: 36px; border-radius: 8px; display: inline-grid; place-items: center;
+      font-family: var(--font-mono); font-size: 18px; cursor: pointer; margin-left: 12px;
+    }
+    .expanded-panel { display: none; margin-top: 20px; background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent); border-radius: 10px; padding: 18px; }
+    .expanded-panel.open { display: block; }
+    .expanded-panel .placeholder { color: var(--slate-light); font-family: var(--font-mono); font-size: 14px; }
+
     /* ---------- Contact ---------- */
     #contact { text-align: center; max-width: 640px; }
     #contact .over { font-family: var(--font-mono); color: var(--accent); font-size: 15px; }
@@ -482,7 +492,9 @@
 
     <!-- STACK -->
     <section id="stack">
-      <div class="heading reveal"><span class="num">05.</span><h2>Tools of the trade</h2></div>
+      <div class="heading reveal"><span class="num">05.</span><h2>Tools of the trade</h2>
+        <button class="expand-toggle" id="expandToggle" aria-expanded="false" aria-controls="expandedPanel" title="Show more">+</button>
+      </div>
       <div class="stack-grid">
         <div class="stack-block reveal">
           <h4>Languages</h4>
@@ -507,6 +519,60 @@
         <div class="stack-block reveal">
           <h4>Concepts</h4>
           <div class="chips"><span>Neural Networks</span><span>CNNs / RNNs</span><span>SVMs</span><span>Model Evaluation</span></div>
+        </div>
+      </div>
+      <div id="expandedPanel" class="expanded-panel" role="region" aria-hidden="true">
+        <div class="stack-grid">
+          <div class="stack-block">
+            <h4>Languages</h4>
+            <div class="chips">
+              <span>Python</span>
+              <span>Java</span>
+              <span>C++</span>
+              <span>TypeScript</span>
+              <span>SQL</span>
+              <span>HTML</span>
+            </div>
+          </div>
+          <div class="stack-block">
+            <h4>Full-Stack / Frameworks</h4>
+            <div class="chips">
+              <span>Next.js</span>
+              <span>NestJS</span>
+              <span>React</span>
+              <span>React Native</span>
+              <span>REST APIs</span>
+              <span>Supabase</span>
+            </div>
+          </div>
+          <div class="stack-block">
+            <h4>Frontend &amp; Tooling</h4>
+            <div class="chips">
+              <span>Webpack</span>
+              <span>SCSS</span>
+              <span>Tailwind CSS</span>
+              <span>Git</span>
+              <span>Postman</span>
+            </div>
+          </div>
+          <div class="stack-block">
+            <h4>ML / DL</h4>
+            <div class="chips">
+              <span>PyTorch</span>
+              <span>TensorFlow</span>
+              <span>scikit-learn</span>
+              <span>NumPy</span>
+              <span>Pandas</span>
+            </div>
+          </div>
+          <div class="stack-block">
+            <h4>Database &amp; Design</h4>
+            <div class="chips">
+              <span>Database Design</span>
+              <span>SQL</span>
+              <span>ETL Fundamentals</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -566,6 +632,18 @@
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
     nav.classList.add('mobile');
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+    // Stack expand/collapse placeholder
+    const expandToggle = document.getElementById('expandToggle');
+    const expandedPanel = document.getElementById('expandedPanel');
+    if (expandToggle && expandedPanel) {
+      expandToggle.addEventListener('click', () => {
+        const open = expandedPanel.classList.toggle('open');
+        expandedPanel.setAttribute('aria-hidden', (!open).toString());
+        expandToggle.setAttribute('aria-expanded', open.toString());
+        expandToggle.textContent = open ? '\u2212' : '+'; // show − when open
+      });
+    }
   </script>
 </body>
 </html>
