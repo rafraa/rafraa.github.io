@@ -240,16 +240,12 @@
     .expanded-panel.open { display: block; }
     .expanded-panel .placeholder { color: var(--slate-light); font-family: var(--font-mono); font-size: 14px; }
 
-    /* Per-box inner expansion */
+    .stack-block { position: relative; }
     .inner-toggle {
       background: transparent; border: 1px solid rgba(136,146,176,0.12); color: var(--accent);
       width: 34px; height: 34px; border-radius: 8px; display: inline-grid; place-items: center;
-      font-family: var(--font-mono); font-size: 16px; cursor: pointer; margin-left: 8px;
+      font-family: var(--font-mono); font-size: 16px; cursor: default; margin-left: 8px;
     }
-    .stack-block { position: relative; }
-    .inner-panel { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.03); }
-    .inner-panel.open { display: block; }
-    .inner-panel .chips span { background: rgba(100,255,218,0.06); }
 
     /* ---------- Contact ---------- */
     #contact { text-align: center; max-width: 640px; }
@@ -509,47 +505,32 @@
       <div class="stack-columns">
         <div class="stack-col">
           <div class="stack-block reveal">
-            <h4>Languages <button class="inner-toggle" aria-expanded="false" aria-controls="langPanel">+</button></h4>
+            <h4>Languages</h4>
             <div class="chips"><span>Python</span><span>TypeScript</span><span>SQL</span><span>Java</span><span>C++</span><span>HTML</span></div>
-            <div id="langPanel" class="inner-panel" aria-hidden="true">
-              <div class="chips"><span>Additional: Bash</span><span>Additional: R (placeholder)</span></div>
-            </div>
           </div>
 
           <div class="stack-block reveal">
-            <h4>ML / DL <button class="inner-toggle" aria-expanded="false" aria-controls="mlPanel">+</button></h4>
-            <div class="chips"><span>PyTorch</span><span>TensorFlow</span><span>scikit-learn</span><span>NumPy</span><span>Pandas</span><span>Faster-Whisper</span><span>Streamlit</span></div>
-            <div id="mlPanel" class="inner-panel" aria-hidden="true">
-              <div class="chips"><span>Model evaluation strategies</span><span>On-device inference</span></div>
-            </div>
+            <h4>ML / DL <button class="inner-toggle" aria-expanded="false" title="More">+</button></h4>
+            <div class="chips"><span>PyTorch</span><span>TensorFlow</span><span>scikit-learn</span><span>NumPy</span><span>Pandas</span><span>Faster-Whisper</span><span>Streamlit</span><span>Model evaluation strategies</span><span>On-device inference</span></div>
           </div>
         </div>
 
         <div class="stack-col">
           <div class="stack-block reveal">
-            <h4>Full-Stack <button class="inner-toggle" aria-expanded="false" aria-controls="fullStackPanel">+</button></h4>
-            <div class="chips"><span>React</span><span>React Native</span><span>Next.js</span><span>NestJS</span><span>REST APIs</span><span>Supabase</span></div>
-            <div id="fullStackPanel" class="inner-panel" aria-hidden="true">
-              <div class="chips"><span>Server-side rendering</span><span>API design patterns</span></div>
-            </div>
+            <h4>Full-Stack <button class="inner-toggle" aria-expanded="false" title="More">+</button></h4>
+            <div class="chips"><span>React</span><span>React Native</span><span>Next.js</span><span>NestJS</span><span>REST APIs</span><span>Supabase</span><span>Server-side rendering</span><span>API design patterns</span></div>
           </div>
 
           <div class="stack-block reveal">
-            <h4>Data <button class="inner-toggle" aria-expanded="false" aria-controls="dataPanel">+</button></h4>
-            <div class="chips"><span>SQL</span><span>Database Design</span><span>ETL Fundamentals</span></div>
-            <div id="dataPanel" class="inner-panel" aria-hidden="true">
-              <div class="chips"><span>Data modeling patterns</span><span>Query optimization</span></div>
-            </div>
+            <h4>Data <button class="inner-toggle" aria-expanded="false" title="More">+</button></h4>
+            <div class="chips"><span>SQL</span><span>Database Design</span><span>ETL Fundamentals</span><span>Data modeling patterns</span><span>Query optimization</span></div>
           </div>
         </div>
 
         <div class="stack-col">
           <div class="stack-block reveal">
-            <h4>Frontend &amp; Tooling <button class="inner-toggle" aria-expanded="false" aria-controls="frontendPanel">+</button></h4>
-            <div class="chips"><span>Webpack</span><span>SCSS</span><span>Tailwind CSS</span><span>Git</span><span>Postman</span></div>
-            <div id="frontendPanel" class="inner-panel" aria-hidden="true">
-              <div class="chips"><span>Accessibility (WCAG)</span><span>Performance optimization</span></div>
-            </div>
+            <h4>Frontend &amp; Tooling <button class="inner-toggle" aria-expanded="false" title="More">+</button></h4>
+            <div class="chips"><span>Webpack</span><span>SCSS</span><span>Tailwind CSS</span><span>Git</span><span>Postman</span><span>Accessibility (WCAG)</span><span>Performance optimization</span></div>
           </div>
 
           <div class="stack-block reveal">
